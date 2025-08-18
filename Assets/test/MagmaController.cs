@@ -9,7 +9,7 @@ public class MagmaController : MonoBehaviour
     
     [Header("プレイヤー設定")]
     public Transform player;               // プレイヤーのTransform
-    public float killOffset = 2f;          // プレイヤーより何Unit上まで上がったら死亡判定
+    public float killOffset = 1f;          // プレイヤーより何Unit上まで上がったら死亡判定
     
     private float currentSpeed;            // 現在のスクロール速度
     private bool gameOver = false;
