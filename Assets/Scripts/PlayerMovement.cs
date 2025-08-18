@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("ワイヤー設定")]
     public float wireSpeed = 10f;
+    public float maxWireDistance = 15f; // ワイヤー射程
     public LineRenderer wireLine;
     public Material solidMaterial;  // 射出可能時の実線
     public Material dashedMaterial; // 射出不可能時の点線
@@ -24,8 +25,24 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        // LineRendererの初期設定
+        if (!wireLine)
+        {
+            // LineRendererが未設定の場合は自動で作成
+            GameObject wireObj = new("WireLine");
+            wireObj.transform.SetParent(transform);
+            wireLine = wireObj.AddComponent<LineRenderer>();
+        }
+        
         if (wireLine)
-            wireLine.positionCount = 2; // 常に2点表示
+        {
+            wireLine.positionCount = 2;
+            wireLine.startWidth = 0.1f;
+            wireLine.endWidth = 0.1f;
+            wireLine.material = solidMaterial;
+            wireLine.sortingOrder = 10; // 前面に表示
+        }
     }
 
     void Update()
@@ -73,10 +90,21 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 direction = mouseWorld - transform.position;
 
-        // clickable タグまたは Layer に当たるかチェック
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-        bool canShoot = hit.collider != null && hit.collider.CompareTag("clickable");
-        Vector2 targetPoint = canShoot ? hit.point : (Vector2)mouseWorld;
+        // Player自身を無視してclickable タグに当たるかチェック
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, maxWireDistance);
+        bool canShoot = false;
+        RaycastHit2D validHit = new();
+        
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider != null && hit.collider.gameObject != gameObject && hit.collider.CompareTag("clickable"))
+            {
+                canShoot = true;
+                validHit = hit;
+                break;
+            }
+        }
+        Vector2 targetPoint = canShoot ? validHit.point : (Vector2)mouseWorld;
 
         // LineRenderer 更新
         if (wireLine)
@@ -95,12 +123,17 @@ public class PlayerMovement : MonoBehaviour
             mouseWorld.z = 0f;
             Vector2 direction = mouseWorld - transform.position;
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-            if (hit.collider != null && hit.collider.CompareTag("clickable"))
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, maxWireDistance);
+            
+            foreach (RaycastHit2D hit in hits)
             {
-                wireTarget = hit.point;
-                isWireActive = true;
-                isAttached = false;
+                if (hit.collider != null && hit.collider.gameObject != gameObject && hit.collider.CompareTag("clickable"))
+                {
+                    wireTarget = hit.point;
+                    isWireActive = true;
+                    isAttached = false;
+                    break;
+                }
             }
         }
 
