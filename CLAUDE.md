@@ -1,5 +1,6 @@
 # CLAUDE.md
 回答は日本語でお願いします
+必要のないログは削除してください
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 

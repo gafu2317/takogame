@@ -432,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1126076327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -614,7 +614,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -806,7 +806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1376161325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1588064037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1249,6 +1249,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   wireSpeed: 10
+  maxWireDistance: 15
   wireLine: {fileID: 1602038712}
   solidMaterial: {fileID: 2100000, guid: 5d8ebd67345f6f94ba52428275cfd99a, type: 2}
   dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
@@ -1381,9 +1382,10 @@ MonoBehaviour:
   dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
   maxDistance: 15
   rayMask:
-    serializedVersion: 2
     m_Bits: 4294967295
   clickableTag: clickable
+  <CanShoot>k__BackingField: 0
+  <HitPoint>k__BackingField: {x: 0, y: 0}
 --- !u!1 &1809498469
 GameObject:
   m_ObjectHideFlags: 0
