@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - clickable
+  - Spike
   layers:
   - Default
   - TransparentFX
