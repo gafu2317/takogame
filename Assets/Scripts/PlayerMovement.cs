@@ -1,98 +1,123 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("移動設定")]
-    public float moveSpeed = 5f;       // 左右移動速度
-    public float jumpForce = 10f;      // ジャンプ力
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
 
     [Header("ワイヤー設定")]
-    public float wireSpeed = 10f;      // ワイヤー巻き取り速度
-    public LineRenderer wireLine;      // ワイヤー表示用
+    public float wireSpeed = 10f;
+    public LineRenderer wireLine;
+    public Material solidMaterial;  // 射出可能時の実線
+    public Material dashedMaterial; // 射出不可能時の点線
+    public float wireJumpFactor = 0.5f; // ワイヤー方向慣性
 
     private Rigidbody2D rb;
     private bool isGrounded;
+
+    private bool isWireActive;
     private bool isAttached;
     private Vector2 wireTarget;
-    private bool isWireActive;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (wireLine)
+            wireLine.positionCount = 2; // 常に2点表示
     }
 
     void Update()
     {
-        // --- 左右移動 ---
+        HandleMovement();
+        HandleJump();
+        UpdateWirePrediction();
+        HandleWireShoot();
+    }
+
+    private void HandleMovement()
+    {
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+    }
 
-        // --- ジャンプ ---
+    private void HandleJump()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isWireActive)
             {
-                // ワイヤー方向を加味したジャンプ
                 Vector2 wireDir = (wireTarget - (Vector2)transform.position).normalized;
-                Vector2 jumpDir = (Vector2.up + wireDir).normalized;
+                Vector2 jumpDir = (Vector2.up + wireDir * wireJumpFactor).normalized;
 
-                rb.linearVelocity = jumpDir * jumpForce; // ワイヤー方向を反映したジャンプ
+                rb.linearVelocity = jumpDir * jumpForce;
+
+                // ワイヤーキャンセル
                 isWireActive = false;
                 isAttached = false;
-
-                if (wireLine != null)
-                    wireLine.positionCount = 0;
             }
             else if (isGrounded)
             {
-                // 地上ジャンプ
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
+    }
 
-        // --- ワイヤー射出 ---
-        if (Input.GetMouseButtonDown(0) && !isWireActive)
+    private void UpdateWirePrediction()
+    {
+        // マウス座標をワールド座標に変換
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = 0f; // 2D 平面に固定
+
+        Vector2 direction = mouseWorld - transform.position;
+
+        // clickable タグまたは Layer に当たるかチェック
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
+        bool canShoot = hit.collider != null && hit.collider.CompareTag("clickable");
+        Vector2 targetPoint = canShoot ? hit.point : (Vector2)mouseWorld;
+
+        // LineRenderer 更新
+        if (wireLine)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            wireTarget = mousePos;
-            isWireActive = true;
-            isAttached = false;
-
-            if (wireLine != null)
-            {
-                wireLine.positionCount = 2;
-                wireLine.SetPosition(0, transform.position);
-                wireLine.SetPosition(1, transform.position);
-            }
+            wireLine.SetPosition(0, transform.position);
+            wireLine.SetPosition(1, isWireActive ? wireTarget : targetPoint);
+            wireLine.material = canShoot ? solidMaterial : dashedMaterial;
         }
     }
 
-    void FixedUpdate()
+    private void HandleWireShoot()
     {
-        // ワイヤー自動巻取り
+        if (Input.GetMouseButtonDown(0) && !isWireActive)
+        {
+            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorld.z = 0f;
+            Vector2 direction = mouseWorld - transform.position;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
+            if (hit.collider != null && hit.collider.CompareTag("clickable"))
+            {
+                wireTarget = hit.point;
+                isWireActive = true;
+                isAttached = false;
+            }
+        }
+
+        // 自動巻取り
         if (isWireActive && !isAttached)
         {
-            Vector2 direction = (wireTarget - (Vector2)transform.position).normalized;
-            rb.linearVelocity = direction * wireSpeed;
+            Vector2 dir = (wireTarget - (Vector2)transform.position).normalized;
+            rb.linearVelocity = dir * wireSpeed;
 
-            // 簡易衝突判定：目標に近づいたら張り付き
-            if (Vector2.Distance(transform.position, wireTarget) < 0.1f)
+            if (Vector2.Distance(transform.position, wireTarget) < 0.2f)
             {
                 isAttached = true;
                 rb.linearVelocity = Vector2.zero;
             }
-
-            // ワイヤー表示更新
-            if (wireLine != null)
-            {
-                wireLine.SetPosition(0, transform.position);
-                wireLine.SetPosition(1, wireTarget);
-            }
         }
     }
 
-    // --- 接地判定 ---
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
