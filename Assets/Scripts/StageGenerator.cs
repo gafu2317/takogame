@@ -6,6 +6,7 @@ public class StageGenerator : MonoBehaviour
     [Header("ステージパーツ")]
     public GameObject initialStage; // 最初のステージ（床あり）
     public GameObject[] stageParts; // 通常のステージ（床に穴あり）
+    public GameObject backgroundPrefab; // 背景パーツ
     
     [Header("生成設定")]
     public int initialStageCount = 5; // 最初に生成するステージ数
@@ -69,6 +70,13 @@ public class StageGenerator : MonoBehaviour
         Vector3 spawnPosition = new Vector3(0, nextStageY, 0);
         GameObject newStage = Instantiate(selectedPart, spawnPosition, Quaternion.identity);
         newStage.transform.parent = this.transform; // StageGeneratorの子オブジェクトにする
+        
+        // 背景も生成
+        if (backgroundPrefab != null)
+        {
+            GameObject newBackground = Instantiate(backgroundPrefab, spawnPosition, Quaternion.identity);
+            newBackground.transform.parent = this.transform;
+        }
         
         // リストに追加
         generatedStages.Add(newStage);
