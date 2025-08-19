@@ -474,8 +474,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u9AD8\u5EA6:0m\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
-  m_sharedMaterial: {fileID: 4180521196211931193, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 7960631021780759329, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -848,8 +848,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GameOver
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
-  m_sharedMaterial: {fileID: 4180521196211931193, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 7960631021780759329, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -984,8 +984,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "R\u30AD\u30FC\u3067\u30EA\u30B9\u30BF\u30FC\u30C8"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
-  m_sharedMaterial: {fileID: 4180521196211931193, guid: d1347d7ad40a2c847828ad2e443cd09e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 7960631021780759329, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   wireSpeed: 10
-  maxWireDistance: 10
+  maxWireDistance: 50
   wireLine: {fileID: 1602038712}
   solidMaterial: {fileID: 2100000, guid: 5d8ebd67345f6f94ba52428275cfd99a, type: 2}
   dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
@@ -1406,6 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   scoreText: {fileID: 1126076328}
+  resultScoreText: {fileID: 0}
   gameOverText: {fileID: 1376161324}
   restartText: {fileID: 1588064036}
   player: {fileID: 1602038707}
