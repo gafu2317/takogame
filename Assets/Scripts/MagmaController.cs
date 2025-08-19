@@ -50,11 +50,9 @@ public class MagmaController : MonoBehaviour
         {
             PlayerDeath();
         }
-        
-        // デバッグ用
-        Debug.Log($"Magma Top: {magmaTop}, Player Bottom: {playerBottom}");
     }
     
+
     void PlayerDeath()
     {
         if (gameOver) return;

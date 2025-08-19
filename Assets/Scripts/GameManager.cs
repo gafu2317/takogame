@@ -5,7 +5,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     [Header("UI References")]
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText;        // プレイ中のスコア（左上）
+    public TextMeshProUGUI resultScoreText;  // リザルトのスコア（中央上）
     public GameObject gameOverText;
     public GameObject restartText;
     
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        
         // 初期位置を記録
         if (player != null)
         {
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
         if (gameOverText != null) gameOverText.SetActive(false);
         if (restartText != null) restartText.SetActive(false);
+        if (resultScoreText != null) resultScoreText.gameObject.SetActive(false);
     }
     
     void Update()
@@ -60,6 +63,11 @@ public class GameManager : MonoBehaviour
                 float height = player.position.y - initialPlayerPosition.y;
                 currentScore = Mathf.Max(0, height * scoreMultiplier);
                 UpdateScoreUI();
+                // Debug.Log($"Player height: {height}, Score: {currentScore}"); // ログを削除
+            }
+            else
+            {
+                Debug.LogError("Player is null!");
             }
         }
         
@@ -75,6 +83,11 @@ public class GameManager : MonoBehaviour
         if (scoreText != null)
         {
             scoreText.text = $"高度: {currentScore:F0}m";
+            // Debug.Log($"Score updated: {currentScore:F0}m"); // ログを削除
+        }
+        else
+        {
+            Debug.LogError("scoreText is null!");
         }
     }
     
@@ -88,10 +101,11 @@ public class GameManager : MonoBehaviour
         if (gameOverText != null) gameOverText.SetActive(true);
         if (restartText != null) restartText.SetActive(true);
         
-        // 最終スコア表示
-        if (scoreText != null)
+        // リザルトスコア表示
+        if (resultScoreText != null)
         {
-            scoreText.text = $"最終高度: {currentScore:F0}m";
+            resultScoreText.text = $"最終高度: {currentScore:F0}m";
+            resultScoreText.gameObject.SetActive(true);
         }
         
         Debug.Log($"ゲームオーバー！最終高度: {currentScore:F0}m");
@@ -105,6 +119,7 @@ public class GameManager : MonoBehaviour
         // UI非表示
         if (gameOverText != null) gameOverText.SetActive(false);
         if (restartText != null) restartText.SetActive(false);
+        if (resultScoreText != null) resultScoreText.gameObject.SetActive(false);
         
         // プレイヤーをリスポーン
         if (playerHealth != null)
@@ -124,6 +139,7 @@ public class GameManager : MonoBehaviour
                 magmaController.ResetGame();
             }
         }
+        
         
         // スコアUI更新
         UpdateScoreUI();
