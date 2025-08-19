@@ -12,6 +12,15 @@ public class CameraController : MonoBehaviour
     public bool followY = true;     // Y軸を追従するか（上下）
     public float fixedX = 0f;       // X軸固定位置
     
+    private Vector3 initialCameraPosition;
+    
+    void Start()
+    {
+        // 初期カメラ位置を記録
+        initialCameraPosition = transform.position;
+        if (fixedX == 0f) fixedX = initialCameraPosition.x;
+    }
+    
     void LateUpdate()
     {
         if (target == null) return;

@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 1595039923}
   - component: {fileID: 1595039922}
   m_Layer: 5
-  m_Name: resultScoreText
+  m_Name: ResultScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,7 +899,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1819188036}
-  - component: {fileID: 1819188035}
   - component: {fileID: 1819188037}
   m_Layer: 0
   m_Name: StageManager
@@ -908,18 +907,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1819188035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819188034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2ddb844a94942c9a7f129c27f814b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StageGenerator
 --- !u!4 &1819188036
 Transform:
   m_ObjectHideFlags: 0
@@ -952,6 +939,7 @@ MonoBehaviour:
   - {fileID: 4347034842101226612, guid: 1b5397595a13a46ab9adcec9feff4679, type: 3}
   - {fileID: 331075600304038775, guid: f1cb53f97ca8b49299065e6a3976f713, type: 3}
   - {fileID: 6976774425043581590, guid: 7b403dd49bde24ff8a89e2d851432a4f, type: 3}
+  backgroundPrefab: {fileID: 5302836950011282732, guid: 4dbfa5f2570aa49ee81a0d45627fa20c, type: 3}
   initialStageCount: 5
   stageHeight: 10
   player: {fileID: 454923772}
@@ -1399,7 +1387,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 5.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1424,7 +1412,7 @@ Transform:
   m_GameObject: {fileID: 2071938651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1489,12 +1477,9 @@ MonoBehaviour:
   target: {fileID: 454923772}
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: -10}
-  limitX: 1
-  limitY: 0
-  minX: -10
-  maxX: 10
-  minY: -5
-  maxY: 100
+  followX: 0
+  followY: 1
+  fixedX: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
