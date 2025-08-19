@@ -1249,6 +1249,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   wireSpeed: 10
+  maxWireDistance: 10
   wireLine: {fileID: 1602038712}
   solidMaterial: {fileID: 2100000, guid: 5d8ebd67345f6f94ba52428275cfd99a, type: 2}
   dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
@@ -1375,15 +1376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593f58f89cd0c7e43b27c3fa80866ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireController
-  firePoint: {fileID: 169741427}
-  previewLine: {fileID: 1602038712}
-  solidMaterial: {fileID: 2100000, guid: 5d8ebd67345f6f94ba52428275cfd99a, type: 2}
-  dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
-  maxDistance: 15
-  rayMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  clickableTag: clickable
 --- !u!1 &1809498469
 GameObject:
   m_ObjectHideFlags: 0
