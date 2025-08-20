@@ -1,0 +1,806 @@
+fileFormatVersion: 2
+guid: 980eeed24c88849208165982b9461e03
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4782508842893772560
+    second: liquidmagma_0
+  - first:
+      213: -4332033379677292209
+    second: liquidmagma_1
+  - first:
+      213: 578304203415196972
+    second: liquidmagma_2
+  - first:
+      213: -3609558300097529283
+    second: liquidmagma_3
+  - first:
+      213: -6363796400345036432
+    second: liquidmagma_4
+  - first:
+      213: -3585642170358026709
+    second: liquidmagma_5
+  - first:
+      213: 3551779445274371711
+    second: liquidmagma_6
+  - first:
+      213: 5259400054339338480
+    second: liquidmagma_7
+  - first:
+      213: 2452250714771087289
+    second: liquidmagma_8
+  - first:
+      213: 5719728915051773425
+    second: liquidmagma_9
+  - first:
+      213: 6458400491233198168
+    second: liquidmagma_10
+  - first:
+      213: 2051694341027871361
+    second: liquidmagma_11
+  - first:
+      213: -1530002076092696763
+    second: liquidmagma_12
+  - first:
+      213: 1011755968300627096
+    second: liquidmagma_13
+  - first:
+      213: 7124654685692641562
+    second: liquidmagma_14
+  - first:
+      213: 4891191030114649287
+    second: liquidmagma_15
+  - first:
+      213: 7192623094965020401
+    second: liquidmagma_16
+  - first:
+      213: -5139072368650198082
+    second: liquidmagma_17
+  - first:
+      213: 8857818507991804600
+    second: liquidmagma_18
+  - first:
+      213: 5812812345461646110
+    second: liquidmagma_19
+  - first:
+      213: -8802308301261958817
+    second: liquidmagma_20
+  - first:
+      213: -8829625772017891216
+    second: liquidmagma_21
+  - first:
+      213: -3972801570744441543
+    second: liquidmagma_22
+  - first:
+      213: -3385125570353664422
+    second: liquidmagma_23
+  - first:
+      213: 6157393116654446760
+    second: liquidmagma_24
+  - first:
+      213: -6682452432948059478
+    second: liquidmagma_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: liquidmagma_0
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 316
+        width: 2518
+        height: 646
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f8f624db8d11adb0800000000000000
+      internalID: -4782508842893772560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_1
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 91
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f493331e79681e3c0800000000000000
+      internalID: -4332033379677292209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_2
+      rect:
+        serializedVersion: 2
+        x: 2677
+        y: 118
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c259da8eb9c860800800000000000000
+      internalID: 578304203415196972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_3
+      rect:
+        serializedVersion: 2
+        x: 2683
+        y: 119
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3abf9ea9d548edc0800000000000000
+      internalID: -3609558300097529283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_4
+      rect:
+        serializedVersion: 2
+        x: 2691
+        y: 127
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 079468604e04fa7a0800000000000000
+      internalID: -6363796400345036432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_5
+      rect:
+        serializedVersion: 2
+        x: 2695
+        y: 107
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2e2620917d3d3ec0800000000000000
+      internalID: -3585642170358026709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_6
+      rect:
+        serializedVersion: 2
+        x: 2710
+        y: 129
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f76ec1c56947a4130800000000000000
+      internalID: 3551779445274371711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_7
+      rect:
+        serializedVersion: 2
+        x: 2715
+        y: 127
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f00192eb742df840800000000000000
+      internalID: 5259400054339338480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_8
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 98
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bfd0225805280220800000000000000
+      internalID: 2452250714771087289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_9
+      rect:
+        serializedVersion: 2
+        x: 2731
+        y: 119
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fdf031d42f806f40800000000000000
+      internalID: 5719728915051773425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_10
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 117
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 850c9295709d0a950800000000000000
+      internalID: 6458400491233198168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_11
+      rect:
+        serializedVersion: 2
+        x: 2656
+        y: 89
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a35a00225197c10800000000000000
+      internalID: 2051694341027871361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_12
+      rect:
+        serializedVersion: 2
+        x: 2657
+        y: 83
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54772e4d73754cae0800000000000000
+      internalID: -1530002076092696763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_13
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 78
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 894b0f151ba7a0e00800000000000000
+      internalID: 1011755968300627096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_14
+      rect:
+        serializedVersion: 2
+        x: 2673
+        y: 82
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a11480840bbdfd260800000000000000
+      internalID: 7124654685692641562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_15
+      rect:
+        serializedVersion: 2
+        x: 2674
+        y: 95
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c48f86c35001e340800000000000000
+      internalID: 4891191030114649287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_16
+      rect:
+        serializedVersion: 2
+        x: 2683
+        y: 87
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f629a2c89451d360800000000000000
+      internalID: 7192623094965020401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_17
+      rect:
+        serializedVersion: 2
+        x: 2703
+        y: 98
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb3649f98e85ea8b0800000000000000
+      internalID: -5139072368650198082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_18
+      rect:
+        serializedVersion: 2
+        x: 2708
+        y: 80
+        width: 7
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba6bb5900b4dea70800000000000000
+      internalID: 8857818507991804600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_19
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 80
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e132f35d7024ba050800000000000000
+      internalID: 5812812345461646110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_20
+      rect:
+        serializedVersion: 2
+        x: 2727
+        y: 95
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f511fc39c3be7d580800000000000000
+      internalID: -8802308301261958817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_21
+      rect:
+        serializedVersion: 2
+        x: 2735
+        y: 70
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0784d37442ed67580800000000000000
+      internalID: -8829625772017891216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_22
+      rect:
+        serializedVersion: 2
+        x: 2671
+        y: 63
+        width: 30
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 935e9ac2506cdd8c0800000000000000
+      internalID: -3972801570744441543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_23
+      rect:
+        serializedVersion: 2
+        x: 2679
+        y: 75
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5e6afa9a3e9501d0800000000000000
+      internalID: -3385125570353664422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_24
+      rect:
+        serializedVersion: 2
+        x: 2683
+        y: 76
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a8af949a64737550800000000000000
+      internalID: 6157393116654446760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: liquidmagma_25
+      rect:
+        serializedVersion: 2
+        x: 2701
+        y: 63
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa2afa9dae82343a0800000000000000
+      internalID: -6682452432948059478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      liquidmagma_0: -4782508842893772560
+      liquidmagma_1: -4332033379677292209
+      liquidmagma_10: 6458400491233198168
+      liquidmagma_11: 2051694341027871361
+      liquidmagma_12: -1530002076092696763
+      liquidmagma_13: 1011755968300627096
+      liquidmagma_14: 7124654685692641562
+      liquidmagma_15: 4891191030114649287
+      liquidmagma_16: 7192623094965020401
+      liquidmagma_17: -5139072368650198082
+      liquidmagma_18: 8857818507991804600
+      liquidmagma_19: 5812812345461646110
+      liquidmagma_2: 578304203415196972
+      liquidmagma_20: -8802308301261958817
+      liquidmagma_21: -8829625772017891216
+      liquidmagma_22: -3972801570744441543
+      liquidmagma_23: -3385125570353664422
+      liquidmagma_24: 6157393116654446760
+      liquidmagma_25: -6682452432948059478
+      liquidmagma_3: -3609558300097529283
+      liquidmagma_4: -6363796400345036432
+      liquidmagma_5: -3585642170358026709
+      liquidmagma_6: 3551779445274371711
+      liquidmagma_7: 5259400054339338480
+      liquidmagma_8: 2452250714771087289
+      liquidmagma_9: 5719728915051773425
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
