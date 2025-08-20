@@ -26,10 +26,11 @@ public class PlayerMovement : MonoBehaviour
     private Transform attachedObject = null;
     private Vector2 attachNormal;
 
-    private float detachDelay = 0.05f; // 解除判定を遅らせる時間
+    private float detachDelay = 0.30f; // 解除判定を遅らせる時間
     private float detachTimer = 0f;
 
     private int groundContacts = 0;   // 接地カウント
+    bool touchedGroundThisFrame = false;
 
     private SpriteRenderer sr; //Player色情報
 
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         HandleJump();
         UpdateWirePrediction();
         HandleWireShoot();
-        Debug.Log("isAttached : " + isAttached);
+        //Debug.Log("isAttached : " + isAttached);
         // 張り付き処理を一箇所で管理
         UpdateAttachment();
         // --- isAttached に応じて色を変える ---
@@ -205,9 +206,19 @@ public class PlayerMovement : MonoBehaviour
         if (!isAttached) return;
 
         bool stillAttached = false;
+        if (touchedGroundThisFrame)
+        {
+            stillAttached = true;
+            touchedGroundThisFrame = false;
+        }
+        else
+        {
+            touchedGroundThisFrame = false;
+        }
         CircleCollider2D playerCollider = GetComponent<CircleCollider2D>();
         if (playerCollider == null)
         {
+            Debug.Log("Detach: PlayerにCircleCollider2Dがない");
             Detach();
             return;
         }
@@ -225,17 +236,28 @@ public class PlayerMovement : MonoBehaviour
         // 元オブジェクトに接触していない場合も周囲のGroundに接触していれば張り付き継続
         if (!stillAttached)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.55f);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1.2f);
+            Collider2D closestGround = null;
+            float closestDist = float.MaxValue;
             foreach (var hit in hits)
             {
-                if (hit.CompareTag("Ground"))
+                //if (hit.CompareTag("Ground"))
+                //{
+                //    attachedObject = hit.transform;
+                //    attachNormal = ((Vector2)transform.position - hit.ClosestPoint(transform.position)).normalized;
+                //    stillAttached = true;
+                //    break;
+                //}
+                if (!hit.CompareTag("Ground")) continue;
+
+                float dist = Vector2.Distance(transform.position, hit.ClosestPoint(transform.position));
+                if (dist < closestDist)
                 {
-                    attachedObject = hit.transform;
-                    attachNormal = ((Vector2)transform.position - hit.ClosestPoint(transform.position)).normalized;
-                    stillAttached = true;
-                    break;
+                    closestDist = dist;
+                    closestGround = hit;
                 }
             }
+
         }
 
         // 接触するオブジェクトがなければ解除判定を遅延
@@ -244,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
             detachTimer += Time.deltaTime;
             if (detachTimer >= detachDelay)
             {
+                Debug.Log("Detach: Groundとの接触が見つからないため解除");
                 Detach();
                 detachTimer = 0f;
                 return;
@@ -264,17 +287,22 @@ public class PlayerMovement : MonoBehaviour
                 jumpDir = (Vector2.up + wireDir * wireJumpFactor).normalized;
             }
             rb.linearVelocity = jumpDir * jumpForce;
+            Debug.Log("Detach: Spaceジャンプで解除");
             Detach();
             return;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            Debug.Log("Detach: Zキーで手動解除");
             Detach();
             return;
         }
 
         HandleAttachMovement();
+
+        // 最後にフラグをリセット
+        touchedGroundThisFrame = false;
     }
 
     // --- 張り付き移動 ---
@@ -301,6 +329,7 @@ public class PlayerMovement : MonoBehaviour
     // --- 張り付き解除 ---
     private void Detach()
     {
+        Debug.Log("Detach() 実行: isAttached = false");
         isAttached = false;
         attachedObject = null;
         rb.gravityScale = 1f;
@@ -316,16 +345,6 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
         }
 
-        // --- 修正前 ---
-        // ワイヤー巻取り中に衝突 & Player以外
-        // if (isWireActive && !isAttached && collision.gameObject != gameObject)
-        // {
-        //     isAttached = true;
-        //     attachedObject = collision.transform;
-        //     attachNormal = collision.contacts[0].normal;
-        //     rb.linearVelocity = Vector2.zero;
-        //     rb.gravityScale = 0f;
-        // }
 
         // --- 修正後 ---
         // ワイヤーが目標に達したとき or 衝突したときに張り付き
@@ -337,6 +356,14 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.gravityScale = 0f;
             isWireActive = false; // ワイヤー巻取り終了
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+            touchedGroundThisFrame = true;
         }
     }
 
