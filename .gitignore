@@ -68,6 +68,5 @@ crashlytics-build.properties
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Unity generated font files
-*.asset
-Assets/Fonts/*.asset
+# Fonts folder
+Assets/Fonts/
