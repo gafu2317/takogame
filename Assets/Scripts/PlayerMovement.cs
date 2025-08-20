@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform attachedObject = null;
     private Vector2 attachNormal;
 
-    private float detachDelay = 0.30f; // 解除判定を遅らせる時間
+    private float detachDelay = 0.15f; // 解除判定を遅らせる時間
     private float detachTimer = 0f;
 
     private int groundContacts = 0;   // 接地カウント
@@ -239,16 +239,10 @@ public class PlayerMovement : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1.2f);
             Collider2D closestGround = null;
             float closestDist = float.MaxValue;
+            
             foreach (var hit in hits)
             {
-                //if (hit.CompareTag("Ground"))
-                //{
-                //    attachedObject = hit.transform;
-                //    attachNormal = ((Vector2)transform.position - hit.ClosestPoint(transform.position)).normalized;
-                //    stillAttached = true;
-                //    break;
-                //}
-                if (!hit.CompareTag("Ground")) continue;
+                if (!hit.CompareTag("Ground") || hit.gameObject == gameObject) continue;
 
                 float dist = Vector2.Distance(transform.position, hit.ClosestPoint(transform.position));
                 if (dist < closestDist)
@@ -257,7 +251,15 @@ public class PlayerMovement : MonoBehaviour
                     closestGround = hit;
                 }
             }
-
+            
+            // 近くにGroundオブジェクトがあれば新しいオブジェクトに張り付き移行
+            if (closestGround != null && closestDist <= 0.8f)
+            {
+                attachedObject = closestGround.transform;
+                attachNormal = ((Vector2)transform.position - closestGround.ClosestPoint(transform.position)).normalized;
+                stillAttached = true;
+                Debug.Log($"張り付き対象を変更: {closestGround.name}");
+            }
         }
 
         // 接触するオブジェクトがなければ解除判定を遅延
