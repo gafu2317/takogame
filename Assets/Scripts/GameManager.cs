@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -76,6 +77,12 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
+        
+        // タイトルに戻る処理
+        if (gameOver && Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            ReturnToTitle();
+        }
     }
     
     void UpdateScoreUI()
@@ -145,5 +152,11 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI();
         
         Debug.Log("ゲームリスタート");
+    }
+    
+    public void ReturnToTitle()
+    {
+        // タイトルシーンに遷移
+        SceneManager.LoadScene("Title");
     }
 }

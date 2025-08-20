@@ -15,6 +15,7 @@ public class StageGenerator : MonoBehaviour
     
     [Header("生成管理")]
     public float generateDistance = 30f; // プレイヤーから何Unity単位先まで生成するか
+    public Transform magma; // マグマのTransform
     
     private List<GameObject> generatedStages = new List<GameObject>();
     private float nextStageY = 0f; // 次のステージのY座標
@@ -42,8 +43,8 @@ public class StageGenerator : MonoBehaviour
                 GenerateNextStage();
             }
             
-            // 下の古いステージを削除（最適化）
-            RemoveOldStages(playerY);
+            // マグマより下の古いステージを削除（最適化）
+            RemoveOldStages();
         }
     }
     
@@ -87,10 +88,13 @@ public class StageGenerator : MonoBehaviour
         Debug.Log($"ステージ生成: {newStage.name} at Y={spawnPosition.y}");
     }
     
-    void RemoveOldStages(float playerY)
+    void RemoveOldStages()
     {
-        // プレイヤーより下に一定距離離れたステージを削除
-        float removeDistance = 50f;
+        if (magma == null) return;
+        
+        // マグマより下に一定距離離れたステージを削除
+        float removeDistance = 20f;
+        float magmaY = magma.position.y;
         
         for (int i = generatedStages.Count - 1; i >= 0; i--)
         {
@@ -98,7 +102,8 @@ public class StageGenerator : MonoBehaviour
             {
                 float stageY = generatedStages[i].transform.position.y;
                 
-                if (playerY - stageY > removeDistance)
+                // ステージがマグマより下にある場合は削除
+                if (magmaY - stageY > removeDistance)
                 {
                     Destroy(generatedStages[i]);
                     generatedStages.RemoveAt(i);
