@@ -10,6 +10,7 @@ public class MagmaController : MonoBehaviour
     [Header("プレイヤー設定")]
     public Transform player;               // プレイヤーのTransform
     public float killOffset = 1f;          // プレイヤーより何Unit上まで上がったら死亡判定
+    public float waveOffset = 0.5f;        // 波を考慮した当たり判定の調整値
     
     private float currentSpeed;            // 現在のスクロール速度
     private bool gameOver = false;
@@ -41,8 +42,10 @@ public class MagmaController : MonoBehaviour
     {
         if (player == null) return;
         
-        // マグマの実際の上端とプレイヤーの下端を比較
-        float magmaTop = transform.position.y + (transform.localScale.y / 2);
+        // マグマの実際の上端とプレイヤーの下端を比較（波を考慮して少し下げる）
+        SpriteRenderer magmaSprite = GetComponent<SpriteRenderer>();
+        float magmaHeight = magmaSprite != null ? magmaSprite.bounds.size.y : transform.localScale.y;
+        float magmaTop = transform.position.y + (magmaHeight / 2) - waveOffset;
         float playerBottom = player.position.y - (player.localScale.y / 2);
         
         // マグマがプレイヤーの実際の位置に触れたら
