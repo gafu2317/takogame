@@ -313,16 +313,33 @@ public class PlayerMovement : MonoBehaviour
         if (!isAttached) return;
 
         Vector2 move = Vector2.zero;
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Mathf.Abs(attachNormal.y) > 0.9f)
+        // 角での移動を改善：どちらの方向でも移動可能にする
+        if (Mathf.Abs(attachNormal.y) > 0.7f)
         {
-            // 天井・床：横移動のみ
-            move.x = Input.GetAxisRaw("Horizontal") * moveSpeed;
+            // 床・天井：主に横移動、少し縦移動も可能
+            move.x = horizontalInput * moveSpeed;
+            if (Mathf.Abs(horizontalInput) < 0.1f) // 横移動していない時のみ縦移動
+            {
+                move.y = verticalInput * moveSpeed * 0.3f;
+            }
         }
-        else if (Mathf.Abs(attachNormal.x) > 0.9f)
+        else if (Mathf.Abs(attachNormal.x) > 0.7f)
         {
-            // 壁：縦移動のみ
-            move.y = Input.GetAxisRaw("Vertical") * moveSpeed;
+            // 壁：主に縦移動、少し横移動も可能
+            move.y = verticalInput * moveSpeed;
+            if (Mathf.Abs(verticalInput) < 0.1f) // 縦移動していない時のみ横移動
+            {
+                move.x = horizontalInput * moveSpeed * 0.3f;
+            }
+        }
+        else
+        {
+            // 斜面や角：両方向移動可能
+            move.x = horizontalInput * moveSpeed * 0.7f;
+            move.y = verticalInput * moveSpeed * 0.7f;
         }
 
         rb.linearVelocity = move;
