@@ -344,7 +344,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   wireSpeed: 10
-  maxWireDistance: 15
+  maxWireDistance: 10
   wireLine: {fileID: 0}
   solidMaterial: {fileID: 0}
   dashedMaterial: {fileID: 0}
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_text: "\u6700\u9AD8\u30B9\u30B3\u30A2\uFF1A0m"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -1179111434431926509, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1595039923
@@ -814,7 +814,7 @@ MonoBehaviour:
   m_text: "R\u30AD\u30FC\u3067\u30EA\u30B9\u30BF\u30FC\u30C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -1179111434431926509, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1602142060
@@ -944,6 +944,7 @@ MonoBehaviour:
   stageHeight: 10
   player: {fileID: 454923772}
   generateDistance: 30
+  magma: {fileID: 0}
 --- !u!1 &1907336492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1005,7 @@ MonoBehaviour:
   m_text: "\u30B9\u30B3\u30A2\uFF1A\uFF10m"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: 3130607553290535978, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: -1997059905048321065, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1115,6 +1116,7 @@ MonoBehaviour:
   maxSpeed: 5
   player: {fileID: 454923772}
   killOffset: 1
+  waveOffset: 0.5
 --- !u!212 &2019921682
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1248,7 +1250,7 @@ MonoBehaviour:
   m_text: GameOver
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -1179111434431926509, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1313,7 +1315,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2040021626
