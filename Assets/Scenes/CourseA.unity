@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 454923769}
   - component: {fileID: 454923768}
   - component: {fileID: 454923767}
-  - component: {fileID: 454923773}
   - component: {fileID: 454923774}
   m_Layer: 0
   m_Name: Player
@@ -347,10 +346,11 @@ MonoBehaviour:
   wireSpeed: 15
   maxWireDistance: 50
   wireLine: {fileID: 454923774}
-  predictionLine: {fileID: 0}
   solidMaterial: {fileID: 2100000, guid: 5d8ebd67345f6f94ba52428275cfd99a, type: 2}
   dashedMaterial: {fileID: 2100000, guid: 575cb498337e9174dab4fd3650ebfdd5, type: 2}
   wireJumpFactor: 0.5
+  normalSprite: {fileID: -2474250949257483082, guid: 11c60c72121ff4608b26113914eb517f, type: 3}
+  attachedSprite: {fileID: 3345508739736421500, guid: 004ce4fbd03674ce0a93b190d0c11ac2, type: 3}
 --- !u!212 &454923771
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,18 +424,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &454923773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454923766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593f58f89cd0c7e43b27c3fa80866ba2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WireController
 --- !u!120 &454923774
 LineRenderer:
   serializedVersion: 2
