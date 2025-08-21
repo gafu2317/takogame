@@ -351,7 +351,7 @@ MonoBehaviour:
   wireJumpFactor: 0.5
   normalSprite: {fileID: -2474250949257483082, guid: 11c60c72121ff4608b26113914eb517f, type: 3}
   attachedSprite: {fileID: 3345508739736421500, guid: 004ce4fbd03674ce0a93b190d0c11ac2, type: 3}
-  aimSprite: {fileID: 21300000, guid: e3c4236e553e90e4cba51ee2546f28a8, type: 3}
+  aimSprite: {fileID: 21300000, guid: a9a040a660cb4bb4889864ceac95ed29, type: 3}
 --- !u!212 &454923771
 SpriteRenderer:
   m_ObjectHideFlags: 0
