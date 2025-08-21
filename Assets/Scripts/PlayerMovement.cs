@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     public Material solidMaterial;    // 射出可能時の実線マテリアル
     public Material dashedMaterial;   // 射出不可時の点線マテリアル
     public float wireJumpFactor = 0.5f; // ワイヤー方向の慣性をジャンプに反映する割合
+    
+    [Header("スプライト設定")]
+    public Sprite normalSprite;       // 通常時のスプライト
+    public Sprite attachedSprite;     // 張り付き時のスプライト
 
     private Rigidbody2D rb;           // Rigidbody2D 参照
     private bool isGrounded;          // 接地判定
@@ -43,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
         if (sr != null)
         {
             sr.color = Color.white; // 初期色
+            // 通常スプライトが未設定の場合は現在のスプライトを保存
+            if (normalSprite == null)
+            {
+                normalSprite = sr.sprite;
+            }
         }
 
         // LineRenderer 初期化
@@ -72,10 +81,17 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("isAttached : " + isAttached);
         // 張り付き処理を一箇所で管理
         UpdateAttachment();
-        // --- isAttached に応じて色を変える ---
+        // --- isAttached に応じてスプライトを変える ---
         if (sr != null)
         {
-            sr.color = isAttached ? Color.red : Color.white;
+            if (isAttached && attachedSprite != null)
+            {
+                sr.sprite = attachedSprite;
+            }
+            else if (!isAttached && normalSprite != null)
+            {
+                sr.sprite = normalSprite;
+            }
         }
     }
 
