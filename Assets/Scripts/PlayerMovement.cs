@@ -37,12 +37,24 @@ public class PlayerMovement : MonoBehaviour
     bool touchedGroundThisFrame = false;
 
     private SpriteRenderer sr; //Player色情報
+    private PlayerHealth playerHealth; // プレイヤーの生存状態管理
 
     void Start()
     {
+        InitializePlayer();
+    }
+    
+    // プレイヤー初期化（Start時およびリスポーン時に呼ばれる）
+    public void InitializePlayer()
+    {
         rb = GetComponent<Rigidbody2D>();
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 高速移動時の衝突検知
-                                                                         // SpriteRenderer を取得
+        
+        // PlayerHealth を取得
+        if (playerHealth == null)
+            playerHealth = GetComponent<PlayerHealth>();
+            
+        // SpriteRenderer を取得
         sr = GetComponent<SpriteRenderer>();
         if (sr != null)
         {
@@ -52,6 +64,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 normalSprite = sr.sprite;
             }
+            
+            // 通常スプライトに戻す
+            if (normalSprite != null)
+            {
+                sr.sprite = normalSprite;
+            }
+            
+            // 張り付き状態をリセット
+            isAttached = false;
+            attachedObject = null;
+            rb.gravityScale = 1f;
+            
+            // スプライトサイズをコライダーに合わせる
+            AdjustSpriteSize();
         }
 
         // LineRenderer 初期化
@@ -74,6 +100,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // 死亡時は一切の操作を無効にする
+        if (playerHealth != null && playerHealth.isDead)
+        {
+            return;
+        }
+        
         HandleMovement();
         HandleJump();
         UpdateWirePrediction();
@@ -87,10 +119,12 @@ public class PlayerMovement : MonoBehaviour
             if (isAttached && attachedSprite != null)
             {
                 sr.sprite = attachedSprite;
+                AdjustSpriteSize(); // サイズ調整
             }
             else if (!isAttached && normalSprite != null)
             {
                 sr.sprite = normalSprite;
+                AdjustSpriteSize(); // サイズ調整
             }
         }
     }
@@ -98,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
     // --- 左右移動 ---
     private void HandleMovement()
     {
+        if (playerHealth != null && playerHealth.isDead) return; // 死亡時は移動不可
         if (isAttached) return; // 張り付き中は別制御
 
         float moveInput = Input.GetAxisRaw("Horizontal");
@@ -107,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
     // --- ジャンプ ---
     private void HandleJump()
     {
+        if (playerHealth != null && playerHealth.isDead) return; // 死亡時はジャンプ不可
         if (!Input.GetKeyDown(KeyCode.Space)) return;
 
         if (isWireActive)
@@ -158,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
     // --- ワイヤー射出＆巻取り ---
     private void HandleWireShoot()
     {
+        if (playerHealth != null && playerHealth.isDead) return; // 死亡時はワイヤー不可
         if (Input.GetMouseButtonDown(0) && !isWireActive)
         {
             Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -409,6 +446,62 @@ public class PlayerMovement : MonoBehaviour
         {
             groundContacts--;
             isGrounded = groundContacts > 0;
+        }
+    }
+    
+    private CircleCollider2D circleCollider; // キャッシュ用
+    private BoxCollider2D boxCollider;       // キャッシュ用
+    private float originalColliderRadius;     // 元のコライダー半径を保存
+
+    // --- スプライトサイズをコライダーに合わせる ---
+    private void AdjustSpriteSize()
+    {
+        if (sr == null || sr.sprite == null) return;
+        
+        // コライダーをキャッシュから取得（初回のみGetComponent）
+        if (circleCollider == null)
+        {
+            circleCollider = GetComponent<CircleCollider2D>();
+            if (circleCollider != null)
+            {
+                originalColliderRadius = circleCollider.radius; // 元の半径を保存
+            }
+        }
+        if (boxCollider == null)
+            boxCollider = GetComponent<BoxCollider2D>();
+        
+        if (circleCollider != null)
+        {
+            float colliderDiameter = originalColliderRadius * 2f;
+            float spriteSize = sr.sprite.bounds.size.x; // スプライトの実際のサイズ
+            
+            // スプライトのサイズをコライダーに合わせて調整（スケールではなくDrawModeを使用）
+            // または、スプライトのsizeを直接変更
+            if (sr.drawMode == SpriteDrawMode.Sliced || sr.drawMode == SpriteDrawMode.Tiled)
+            {
+                sr.size = new Vector2(colliderDiameter, colliderDiameter);
+            }
+            else
+            {
+                // 通常のスプライトの場合、transformのscaleを調整してからコライダーを元に戻す
+                float scale = colliderDiameter / spriteSize;
+                transform.localScale = new Vector3(scale, scale, 1f);
+                
+                // コライダーサイズを元のサイズに戻す（スケールの影響をキャンセル）
+                circleCollider.radius = originalColliderRadius / scale;
+            }
+        }
+        else if (boxCollider != null)
+        {
+            Vector2 colliderSize = boxCollider.size;
+            Vector2 spriteSize = sr.sprite.bounds.size;
+            
+            float scaleX = colliderSize.x / spriteSize.x;
+            float scaleY = colliderSize.y / spriteSize.y;
+            
+            // 正円を維持するため小さい方のスケールを使用
+            float scale = Mathf.Min(scaleX, scaleY);
+            transform.localScale = new Vector3(scale, scale, 1f);
         }
     }
 }
