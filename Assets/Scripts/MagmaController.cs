@@ -3,9 +3,14 @@ using UnityEngine;
 public class MagmaController : MonoBehaviour
 {
     [Header("スクロール設定")]
-    public float initialSpeed = 1f;        // 初期スクロール速度
-    public float acceleration = 0.01f;     // 加速度（毎秒どれだけ速くなるか）
-    public float maxSpeed = 5f;            // 最大スクロール速度
+    public float initialSpeed = 2f;        // 初期スクロール速度
+    public float acceleration = 0.02f;     // 基本加速度（毎秒どれだけ速くなるか）
+    public float maxSpeed = 15f;           // 最大スクロール速度
+    
+    [Header("段階的加速設定")]
+    public float speedIncreaseInterval = 8f;   // 速度上昇の間隔（秒）
+    public float speedIncreaseAmount = 0.8f;   // 間隔ごとの速度上昇量
+    public float maxAcceleration = 5f;         // 最大加速度
     
     [Header("プレイヤー設定")]
     public Transform player;               // プレイヤーのTransform
@@ -13,6 +18,8 @@ public class MagmaController : MonoBehaviour
     public float waveOffset = 0.5f;        // 波を考慮した当たり判定の調整値
     
     private float currentSpeed;            // 現在のスクロール速度
+    private float gameTime;                // ゲーム開始からの経過時間
+    private float currentAcceleration;     // 現在の加速度
     private bool gameOver = false;
     
     // ゲームオーバー時のイベント
@@ -21,14 +28,22 @@ public class MagmaController : MonoBehaviour
     void Start()
     {
         currentSpeed = initialSpeed;
+        currentAcceleration = acceleration;
+        gameTime = 0f;
     }
     
     void Update()
     {
         if (gameOver) return;
         
+        // ゲーム時間を更新
+        gameTime += Time.deltaTime;
+        
+        // 段階的に加速度を上昇
+        UpdateAcceleration();
+        
         // 速度を徐々に上げる
-        currentSpeed += acceleration * Time.deltaTime;
+        currentSpeed += currentAcceleration * Time.deltaTime;
         currentSpeed = Mathf.Min(currentSpeed, maxSpeed); // 最大速度を超えないように
         
         // マグマを上に移動
@@ -36,6 +51,21 @@ public class MagmaController : MonoBehaviour
         
         // プレイヤーとの距離をチェック
         CheckPlayerCollision();
+    }
+    
+    // 段階的に加速度を更新
+    private void UpdateAcceleration()
+    {
+        // 指定間隔ごとに加速度を上昇
+        int currentStage = Mathf.FloorToInt(gameTime / speedIncreaseInterval);
+        float targetAcceleration = acceleration + (currentStage * speedIncreaseAmount * 0.01f);
+        currentAcceleration = Mathf.Min(targetAcceleration, maxAcceleration);
+        
+        // デバッグログ（段階が変わったときのみ表示）
+        if (currentStage > 0 && gameTime % speedIncreaseInterval < Time.deltaTime)
+        {
+            Debug.Log($"マグマ段階 {currentStage}: 加速度 {currentAcceleration:F3}, 現在速度 {currentSpeed:F2}");
+        }
     }
     
     void CheckPlayerCollision()
@@ -75,6 +105,8 @@ public class MagmaController : MonoBehaviour
     {
         gameOver = false;
         currentSpeed = initialSpeed;
+        currentAcceleration = acceleration;
+        gameTime = 0f;
         Time.timeScale = 1f;
     }
     
@@ -82,6 +114,18 @@ public class MagmaController : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+    
+    // 現在のゲーム段階を取得
+    public int GetCurrentStage()
+    {
+        return Mathf.FloorToInt(gameTime / speedIncreaseInterval);
+    }
+    
+    // 現在の加速度を取得
+    public float GetCurrentAcceleration()
+    {
+        return currentAcceleration;
     }
     
     // デバッグ用：ギズモで範囲を表示

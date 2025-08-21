@@ -48,14 +48,15 @@ public class PlayerHealth : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Kinematic; // 物理演算を停止
         }
         
-        // プレイヤーの操作を無効化
-        TestPlayerController controller = GetComponent<TestPlayerController>();
-        if (controller != null)
+        // プレイヤーの操作を無効化（キャッシュから取得）
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
+        if (playerMovement != null)
         {
-            controller.enabled = false;
+            playerMovement.enabled = false;
         }
         
         // 死亡イベントを発火
@@ -69,6 +70,8 @@ public class PlayerHealth : MonoBehaviour
         }
     }
     
+    private PlayerMovement playerMovement; // キャッシュ用
+
     // ゲームリセット用
     public void Respawn(Vector3 spawnPosition)
     {
@@ -79,22 +82,18 @@ public class PlayerHealth : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.isKinematic = false;
+            rb.bodyType = RigidbodyType2D.Dynamic; // 物理演算を再開
             rb.linearVelocity = Vector2.zero;
         }
         
-        // 操作を再有効化
-        TestPlayerController controller = GetComponent<TestPlayerController>();
-        if (controller != null)
+        // 操作を再有効化（キャッシュから取得）
+        if (playerMovement == null)
+            playerMovement = GetComponent<PlayerMovement>();
+        if (playerMovement != null)
         {
-            controller.enabled = true;
-        }
-        
-        // 色を元に戻す
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            sr.color = Color.blue;
+            playerMovement.enabled = true;
+            // プレイヤーの状態を初期化（スプライトや状態をリセット）
+            playerMovement.InitializePlayer();
         }
         
         Debug.Log("プレイヤーがリスポーンしました");
