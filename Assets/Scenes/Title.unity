@@ -179,7 +179,7 @@ MonoBehaviour:
   m_text: "\u30B3\u30FC\u30B9A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -4846785888064411797, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: -5605724648898196352, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_text: "\u30B3\u30FC\u30B9B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -4846785888064411797, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: -5605724648898196352, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_text: "\u30BF\u30B3\u30B2\u30FC\u30E0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
-  m_sharedMaterial: {fileID: -4846785888064411797, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
+  m_sharedMaterial: {fileID: -5605724648898196352, guid: 3a02a8f31893e4563b26ed8dc2da7fba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
