@@ -419,8 +419,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GameOver
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c28e9a774fd4694c9baef6cc62145b7, type: 2}
-  m_sharedMaterial: {fileID: -576341393226207400, guid: 3c28e9a774fd4694c9baef6cc62145b7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1354,6 +1354,7 @@ MonoBehaviour:
   wireJumpFactor: 0.5
   normalSprite: {fileID: -2474250949257483082, guid: 11c60c72121ff4608b26113914eb517f, type: 3}
   attachedSprite: {fileID: 3345508739736421500, guid: 004ce4fbd03674ce0a93b190d0c11ac2, type: 3}
+  aimSprite: {fileID: 21300000, guid: e3c4236e553e90e4cba51ee2546f28a8, type: 3}
 --- !u!212 &1845038811
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1460,6 +1461,9 @@ MonoBehaviour:
   initialSpeed: 1
   acceleration: 0.01
   maxSpeed: 5
+  speedIncreaseInterval: 8
+  speedIncreaseAmount: 0.8
+  maxAcceleration: 5
   player: {fileID: 1845038805}
   killOffset: 1
   waveOffset: 0.5
