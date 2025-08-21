@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     private Transform attachedObject = null;
     private Vector2 attachNormal;
 
+    public Sprite aimSprite;         // 照準スプライト画像（透過PNG）
+    private GameObject aimInstance; // 生成した照準オブジェクト
+
     private float detachDelay = 0.15f; // 解除判定を遅らせる時間
     private float detachTimer = 0f;
 
@@ -96,6 +99,15 @@ public class PlayerMovement : MonoBehaviour
             wireLine.material = dashedMaterial;
             wireLine.sortingOrder = 10;
         }
+        // --- 照準オブジェクト生成 ---
+        if (aimSprite != null && aimInstance == null)
+        {
+            aimInstance = new GameObject("Aim");
+            var srAim = aimInstance.AddComponent<SpriteRenderer>();
+            srAim.sprite = aimSprite;
+            srAim.sortingOrder = 20; // プレイヤーより前に描画されるよう調整
+            aimInstance.transform.localScale = Vector3.one * 0.1f; // 大きさ調整
+        }
     }
 
     void Update()
@@ -127,6 +139,8 @@ public class PlayerMovement : MonoBehaviour
                 AdjustSpriteSize(); // サイズ調整
             }
         }
+
+        UpdateAim(); // ← 追加
     }
 
     // --- 左右移動 ---
@@ -430,6 +444,24 @@ public class PlayerMovement : MonoBehaviour
             isWireActive = false; // ワイヤー巻取り終了
         }
     }
+
+    // --- 照準更新処理 ---
+    private void UpdateAim()
+    {
+        if (aimInstance == null) return;
+
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = 0f;
+        aimInstance.transform.position = mouseWorld;
+
+        // 射程可否で色を変える（任意）
+        SpriteRenderer srAim = aimInstance.GetComponent<SpriteRenderer>();
+        if (srAim != null)
+        {
+            srAim.color = canShoot ? Color.green : Color.red;
+        }
+    }
+
 
     void OnCollisionStay2D(Collision2D collision)
     {
