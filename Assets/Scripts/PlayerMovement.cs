@@ -11,11 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("ワイヤー設定")]
     public float wireSpeed = 10f;     // ワイヤー巻き取り速度
     public float maxWireDistance = 15f; // ワイヤー射程
-    public LineRenderer wireLine;     // ワイヤー描画用（実際のワイヤー）
-    public LineRenderer predictionLine; // 予測線描画用
+    public LineRenderer wireLine;     // ワイヤー描画用
     public Material solidMaterial;    // 射出可能時の実線マテリアル
     public Material dashedMaterial;   // 射出不可時の点線マテリアル
     public float wireJumpFactor = 0.5f; // ワイヤー方向の慣性をジャンプに反映する割合
+    
+    [Header("スプライト設定")]
+    public Sprite normalSprite;       // 通常時のスプライト
+    public Sprite attachedSprite;     // 張り付き時のスプライト
 
     private Rigidbody2D rb;           // Rigidbody2D 参照
     private bool isGrounded;          // 接地判定
@@ -39,15 +42,19 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // 高速移動時の衝突検知
-
-        // SpriteRenderer を取得
+                                                                         // SpriteRenderer を取得
         sr = GetComponent<SpriteRenderer>();
         if (sr != null)
         {
             sr.color = Color.white; // 初期色
+            // 通常スプライトが未設定の場合は現在のスプライトを保存
+            if (normalSprite == null)
+            {
+                normalSprite = sr.sprite;
+            }
         }
 
-        // LineRenderer 初期化（実線ワイヤー用）
+        // LineRenderer 初期化
         if (!wireLine)
         {
             GameObject wireObj = new GameObject("WireLine");
@@ -60,25 +67,8 @@ public class PlayerMovement : MonoBehaviour
             wireLine.positionCount = 2;
             wireLine.startWidth = 0.1f;
             wireLine.endWidth = 0.1f;
-            wireLine.material = solidMaterial;
+            wireLine.material = dashedMaterial;
             wireLine.sortingOrder = 10;
-        }
-
-        // LineRenderer 初期化（予測線用）
-        if (!predictionLine)
-        {
-            GameObject predObj = new GameObject("PredictionLine");
-            predObj.transform.SetParent(transform);
-            predictionLine = predObj.AddComponent<LineRenderer>();
-        }
-
-        if (predictionLine)
-        {
-            predictionLine.positionCount = 2;
-            predictionLine.startWidth = 0.05f;
-            predictionLine.endWidth = 0.05f;
-            predictionLine.material = dashedMaterial;
-            predictionLine.sortingOrder = 11;
         }
     }
 
@@ -86,16 +76,22 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
+        UpdateWirePrediction();
         HandleWireShoot();
+        //Debug.Log("isAttached : " + isAttached);
+        // 張り付き処理を一箇所で管理
         UpdateAttachment();
-
-        UpdateWirePrediction(); // 予測線
-        UpdateWireLine();       // 実線ワイヤー
-
-        // --- isAttached に応じて色を変える ---
+        // --- isAttached に応じてスプライトを変える ---
         if (sr != null)
         {
-            sr.color = isAttached ? Color.red : Color.white;
+            if (isAttached && attachedSprite != null)
+            {
+                sr.sprite = attachedSprite;
+            }
+            else if (!isAttached && normalSprite != null)
+            {
+                sr.sprite = normalSprite;
+            }
         }
     }
 
@@ -129,11 +125,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // --- 予測線描画 ---
+    // --- ワイヤー予測線 ---
     private void UpdateWirePrediction()
     {
-        if (!predictionLine) return;
-
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
 
@@ -151,36 +145,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        predictionLine.SetPosition(0, transform.position);
-        predictionLine.SetPosition(1, targetPoint);
-        predictionLine.material = canShoot ? solidMaterial : dashedMaterial;
-        predictionLine.startColor = canShoot ? Color.green : Color.white;
-        predictionLine.endColor = canShoot ? Color.green : Color.white;
-    }
-
-    // --- 実線ワイヤー描画 ---
-    // --- 実線ワイヤー描画 ---
-    private void UpdateWireLine()
-    {
-        if (!wireLine) return;
-
-        if (isWireActive)
+        if (wireLine)
         {
-            // 発射中はワイヤー線を描画
             wireLine.SetPosition(0, transform.position);
-            wireLine.SetPosition(1, wireTarget);
-            wireLine.material = solidMaterial;
-            wireLine.startColor = Color.red;
-            wireLine.endColor = Color.red;
-        }
-        else
-        {
-            // 張り付き中 or 非発射時はワイヤー線を見えなくする
-            wireLine.SetPosition(0, transform.position);
-            wireLine.SetPosition(1, transform.position); // 同じ座標にすることで非表示扱い
+            wireLine.SetPosition(1, isWireActive ? wireTarget : targetPoint);
+            wireLine.material = canShoot ? solidMaterial : dashedMaterial;
+            wireLine.startColor = canShoot ? Color.green : Color.white;
+            wireLine.endColor = canShoot ? Color.green : Color.white;
         }
     }
-
 
     // --- ワイヤー射出＆巻取り ---
     private void HandleWireShoot()
@@ -203,6 +176,22 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        //修正前
+        //if (isWireActive && !isAttached)
+        //{
+        //    Vector2 dir = (wireTarget - (Vector2)transform.position).normalized;
+        //    rb.linearVelocity = dir * wireSpeed;
+
+        //    if (Vector2.Distance(transform.position, wireTarget) < 0.2f)
+        //    {
+        //        // 張り付き状態へ
+        //        isAttached = true;
+        //        rb.linearVelocity = Vector2.zero;
+        //        rb.gravityScale = 0f;
+        //    }
+        //}
+
+        // 修正
         if (isWireActive && !isAttached)
         {
             Vector2 dir = (wireTarget - (Vector2)transform.position);
@@ -242,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
         {
             touchedGroundThisFrame = false;
         }
-
         CircleCollider2D playerCollider = GetComponent<CircleCollider2D>();
         if (playerCollider == null)
         {
@@ -267,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 1.2f);
             Collider2D closestGround = null;
             float closestDist = float.MaxValue;
-
+            
             foreach (var hit in hits)
             {
                 if (!hit.CompareTag("Ground") || hit.gameObject == gameObject) continue;
@@ -279,7 +267,8 @@ public class PlayerMovement : MonoBehaviour
                     closestGround = hit;
                 }
             }
-
+            
+            // 近くにGroundオブジェクトがあれば新しいオブジェクトに張り付き移行
             if (closestGround != null && closestDist <= 0.8f)
             {
                 attachedObject = closestGround.transform;
@@ -390,6 +379,7 @@ public class PlayerMovement : MonoBehaviour
             groundContacts++;
             isGrounded = true;
         }
+
 
         // --- 修正後 ---
         // ワイヤーが目標に達したとき or 衝突したときに張り付き
